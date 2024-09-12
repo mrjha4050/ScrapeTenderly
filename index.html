@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tender Data</title>
+</head>
+<body>
+    <h1>Advanced Search</h1>
+    <form action="request_handler.php" method="post">
+        <label for="search">Search:</label>
+        <input type="text" id="search" name="search">
+        <button type="submit">Search</button>
+    </form>
+    <div id="results"></div>
+    <script>
+        function fetchResults() {
+            fetch('request_handler.php', {
+                method: 'POST',
+                body: new FormData(document.querySelector('form'))
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('results').innerHTML = JSON.stringify(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
